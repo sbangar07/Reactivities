@@ -7,6 +7,7 @@ import ActivityFilters from './ActivityFilters';
 import ActivityList from './ActivityList';
 
 export default observer(function ActivityDashboard() {
+    debugger;
     const {activityStore} = useStore();
     const {loadActivities, activityRegistry} = activityStore;
 

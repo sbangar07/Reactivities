@@ -29,6 +29,7 @@ export default class ActivityStore {
     }
 
     loadActivities = async () => {
+        debugger;
         this.loadingInitial = true;
         try {
             const activities = await agent.Activities.list();

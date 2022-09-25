@@ -7,14 +7,18 @@ import reportWebVitals from "./reportWebVitals";
 import { store, StoreContext } from "./app/stores/store";
 import { BrowserRouter } from "react-router-dom";
 import { createRoot } from "react-dom/client";
+import { Router } from 'react-router-dom';
+import {createBrowserHistory} from 'history';
+
+export const history = createBrowserHistory();
 
 const container = document.getElementById("root")!;
 const root = createRoot(container!); // createRoot(container!) if you use TypeScript
 root.render(
-  <StoreContext.Provider value={store}>
-    <BrowserRouter>
+<StoreContext.Provider value={store}>
+<BrowserRouter>
       <App />
-    </BrowserRouter>
+</BrowserRouter>
   </StoreContext.Provider>
 );
 
