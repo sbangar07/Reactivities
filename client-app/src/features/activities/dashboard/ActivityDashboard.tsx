@@ -7,7 +7,6 @@ import ActivityFilters from './ActivityFilters';
 import ActivityList from './ActivityList';
 
 export default observer(function ActivityDashboard() {
-    debugger;
     const {activityStore} = useStore();
     const {loadActivities, activityRegistry} = activityStore;
 
@@ -15,7 +14,7 @@ export default observer(function ActivityDashboard() {
       if (activityRegistry.size <= 1) loadActivities();
     }, [activityRegistry.size, loadActivities])
   
-    if (activityStore.loadingInitial) return <LoadingComponent content='Loading app' />
+    if (activityStore.loadingInitial) return <LoadingComponent content='Loading activities...' />
 
     return (
         <Grid>
