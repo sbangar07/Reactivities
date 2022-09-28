@@ -19,7 +19,7 @@ root.render(
 <StoreContext.Provider value={store}>
 <BrowserRouter>
       <App />
-</BrowserRouter>
+    </BrowserRouter>,
   </StoreContext.Provider>
 );
 
