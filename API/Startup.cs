@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using API.Extensions;
 using API.Middleware;
+using API.SignalR;
 using Application.Activities;
 using Application.Core;
 using AutoMapper;
@@ -34,19 +35,19 @@ namespace API
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        [Obsolete]
         public void ConfigureServices(IServiceCollection services)
         {
-  
-            services.AddControllers(opt => 
-            {
-                var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
-                opt.Filters.Add(new AuthorizeFilter(policy));
-            })
-                .AddFluentValidation(config => 
-            {
-                config.RegisterValidatorsFromAssemblyContaining<Create>();
-            });
+            #region AuthPolicy
+	services.AddControllers(opt => 
+	            {
+	                var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+	                opt.Filters.Add(new AuthorizeFilter(policy));
+	            })
+	                .AddFluentValidation(config => 
+	            {
+	                config.RegisterValidatorsFromAssemblyContaining<Create>();
+	            })
+        #endregion;
             services.AddApplicationServices(_config);
             services.AddIdentityServices(_config);
         }
@@ -74,6 +75,7 @@ namespace API
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<ChatHub>("/chat");
             });
         }
     }

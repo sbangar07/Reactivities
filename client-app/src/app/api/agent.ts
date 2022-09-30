@@ -15,6 +15,7 @@ const sleep = (delay: number) => {
 axios.defaults.baseURL = 'http://localhost:5000/api';
 
 axios.interceptors.request.use(config => {
+    debugger;
     const token = store.commonStore.token;
     if (token) config.headers!.Authorization = `Bearer ${token}`
     return config;
@@ -86,13 +87,13 @@ const Profiles = {
     uploadPhoto: (file: Blob) => {
         let formData = new FormData();
         formData.append('File', file);
-        debugger;
         return axios.post<Photo>('photos', formData, {
             headers: {'Content-type': 'multipart/form-data'}
         })
     },
     setMainPhoto: (id: string) => requests.post(`/photos/${id}/setMain`, {}),
-    deletePhoto: (id: string) => requests.del(`/photos/${id}`)
+    deletePhoto: (id: string) => requests.del(`/photos/${id}`),
+    updateProfile: (profile: Partial<Profile>) => requests.put(`/profiles`, profile)
 }
 
 const agent = {

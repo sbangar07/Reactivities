@@ -46,7 +46,6 @@ export default class ActivityStore {
     }
 
     loadActivity = async (id: string) => {
-        debugger;
         let activity = this.getActivity(id);
         if (activity) {
             this.selectedActivity = activity;
@@ -69,7 +68,6 @@ export default class ActivityStore {
     }
 
     private setActivity = (activity: Activity) => {
-        debugger;
         const user = store.userStore.user;
         if (user) {
             activity.isGoing = activity.attendees!.some(
@@ -175,5 +173,20 @@ export default class ActivityStore {
         } finally {
             runInAction(() => this.loading = false);
         }
+    }
+
+    // updateAttendeeFollowing = (username: string) => {
+    //     this.activityRegistry.forEach(activity => {
+    //         activity.attendees.forEach(attendee => {
+    //             if (attendee.username === username) {
+    //                 attendee.following ? attendee.followersCount-- : attendee.followersCount++;
+    //                 attendee.following = !attendee.following;
+    //             }
+    //         })
+    //     })
+    // }
+
+    clearSelectedActivity = () => {
+        this.selectedActivity = undefined;
     }
 }
