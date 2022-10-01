@@ -15,7 +15,6 @@ const sleep = (delay: number) => {
 axios.defaults.baseURL = 'http://localhost:5000/api';
 
 axios.interceptors.request.use(config => {
-    debugger;
     const token = store.commonStore.token;
     if (token) config.headers!.Authorization = `Bearer ${token}`
     return config;
@@ -26,7 +25,6 @@ axios.interceptors.response.use(async response => {
     return response;
 }, (error: AxiosError) => {
     const {data, status, config} = error.response! as AxiosResponse;
-    debugger;
     switch (status) {
         case 400:
             if (config.method === 'get' && data.errors.hasOwnProperty('id')) {
@@ -93,7 +91,10 @@ const Profiles = {
     },
     setMainPhoto: (id: string) => requests.post(`/photos/${id}/setMain`, {}),
     deletePhoto: (id: string) => requests.del(`/photos/${id}`),
-    updateProfile: (profile: Partial<Profile>) => requests.put(`/profiles`, profile)
+    updateProfile: (profile: Partial<Profile>) => requests.put(`/profiles`, profile),
+    updateFollowing: (username: string) => requests.post(`/follow/${username}`, {}),
+    listFollowings: (username: string, predicate: string) => 
+        requests.get<Profile[]>(`/follow/${username}?predicate=${predicate}`)
 }
 
 const agent = {

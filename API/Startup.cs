@@ -46,8 +46,8 @@ namespace API
 	                .AddFluentValidation(config => 
 	            {
 	                config.RegisterValidatorsFromAssemblyContaining<Create>();
-	            })
-        #endregion;
+	            });
+        #endregion
             services.AddApplicationServices(_config);
             services.AddIdentityServices(_config);
         }
