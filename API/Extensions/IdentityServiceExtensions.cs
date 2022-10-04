@@ -29,7 +29,7 @@ namespace API.Extensions
             var newkey =  config.GetSection("AppSettings:Token").Value;
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(newkey));
 
-
+    
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(opt =>
                 {

@@ -15,11 +15,13 @@ namespace API.Middleware
         private readonly ILogger<ExceptionMiddleware> _logger;
         private readonly IHostEnvironment _env;
         public ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddleware> logger, 
-            IHostEnvironment env)
+            IHostEnvironment env,IConfiguration config)
         {
             _env = env;
             _logger = logger;
             _next = next;
+            _logger.LogError("sachin Bangar");
+            _logger.LogError(config.GetSection("AppSettings:Token").Value);
         }
 
         public async Task InvokeAsync(HttpContext context)
@@ -27,9 +29,11 @@ namespace API.Middleware
             try 
             {
                 await _next(context);
+                 
             }
             catch (Exception ex)
             {
+                
                 _logger.LogError(ex, ex.Message);
                 context.Response.ContentType = "application/json";
                 context.Response.StatusCode = (int) HttpStatusCode.InternalServerError;
