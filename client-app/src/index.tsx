@@ -10,6 +10,8 @@ import { BrowserRouter } from "react-router-dom";
 import { createRoot } from "react-dom/client";
 import { Router } from 'react-router-dom';
 import {createBrowserHistory} from 'history';
+import ScrollToTop from './app/layout/ScrollToTop';
+
 
 export const history = createBrowserHistory();
 
@@ -18,6 +20,7 @@ const root = createRoot(container!); // createRoot(container!) if you use TypeSc
 root.render(
 <StoreContext.Provider value={store}>
 <BrowserRouter>
+    <ScrollToTop />
       <App />
     </BrowserRouter>,
   </StoreContext.Provider>

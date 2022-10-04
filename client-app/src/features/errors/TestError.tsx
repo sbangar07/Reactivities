@@ -2,43 +2,32 @@ import React, { useState } from 'react';
 import {Button, Header, Segment} from "semantic-ui-react";
 import axios from 'axios';
 import ValidationErrors from './ValidationErrors';
-import { useHistory, useLocation } from 'react-router-dom';
 
 export default function TestErrors() {
-
-    let history = useHistory();
-    
-    debugger;
-    const baseUrl = 'http://localhost:5000/api/'
+    const baseUrl = process.env.REACT_APP_API_URL;
     const [errors, setErrors] = useState(null);
 
     function handleNotFound() {
-
         axios.get(baseUrl + 'buggy/not-found').catch(err => console.log(err.response));
     }
 
     function handleBadRequest() {
-        debugger;
         axios.get(baseUrl + 'buggy/bad-request').catch(err => console.log(err.response));
     }
 
     function handleServerError() {
-        debugger;
         axios.get(baseUrl + 'buggy/server-error').catch(err => console.log(err.response));
     }
 
     function handleUnauthorised() {
-        debugger;
         axios.get(baseUrl + 'buggy/unauthorised').catch(err => console.log(err.response));
     }
 
     function handleBadGuid() {
-        debugger;
         axios.get(baseUrl + 'activities/notaguid').catch(err => console.log(err));
     }
 
     function handleValidationError() {
-        debugger;
         axios.post(baseUrl + 'activities', {}).catch(err => setErrors(err));
     }
 

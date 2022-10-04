@@ -22,6 +22,7 @@ namespace Infrastructure.Security
         {
             _httpContextAccessor = httpContextAccessor;
             _dbContext = dbContext;
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
         }
 
         protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, IsHostRequirement requirement)
