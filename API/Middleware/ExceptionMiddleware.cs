@@ -15,13 +15,13 @@ namespace API.Middleware
         private readonly ILogger<ExceptionMiddleware> _logger;
         private readonly IHostEnvironment _env;
         public ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddleware> logger, 
-            IHostEnvironment env,IConfiguration config)
+            IHostEnvironment env)
         {
             _env = env;
             _logger = logger;
             _next = next;
-            _logger.LogError("sachin Bangar");
-            _logger.LogError(config.GetSection("AppSettings:Token").Value);
+            // _logger.LogError("sachin Bangar");
+            // _logger.LogError(config.GetSection("AppSettings:Token").Value);
         }
 
         public async Task InvokeAsync(HttpContext context)
